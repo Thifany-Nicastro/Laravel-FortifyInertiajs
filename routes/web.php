@@ -16,6 +16,6 @@ use Inertia\Inertia;
 
 Route::get('/', function () {
     return Inertia::render('Welcome');
-});
+})->name('welcome');
 
-Route::get('/home', 'UserController@index')->middleware(['auth']);
+Route::get('/home', 'UserController@index')->name('home')->middleware(['auth']);
