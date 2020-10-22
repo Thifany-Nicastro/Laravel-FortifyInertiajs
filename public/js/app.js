@@ -2990,7 +2990,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
+  props: {
+    errors: Object
+  },
   data: function data() {
     return {
       form: {
@@ -38752,6 +38756,7 @@ var render = function() {
                     }
                   ],
                   staticClass: "form-control",
+                  class: { "is-invalid": _vm.errors.email },
                   attrs: { id: "email", type: "email", name: "email" },
                   domProps: { value: _vm.form.email },
                   on: {
@@ -38762,7 +38767,13 @@ var render = function() {
                       _vm.$set(_vm.form, "email", $event.target.value)
                     }
                   }
-                })
+                }),
+                _vm._v(" "),
+                _vm.errors.email
+                  ? _c("div", { staticClass: "invalid-feedback" }, [
+                      _vm._v(_vm._s(_vm.errors.email))
+                    ])
+                  : _vm._e()
               ])
             ]),
             _vm._v(" "),

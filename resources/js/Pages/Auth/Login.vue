@@ -10,7 +10,8 @@
                             <label for="email" class="col-md-4 col-form-label text-md-right">E-mail</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" name="email" v-model="form.email">
+                                <input id="email" type="email" class="form-control" :class="{ 'is-invalid': errors.email }" name="email" v-model="form.email">
+                                <div v-if="errors.email" class="invalid-feedback">{{ errors.email }}</div>
                             </div>
                         </div>
 
@@ -38,6 +39,10 @@
 
 <script>
     export default {
+        props: {
+            errors: Object,
+        },
+
         data() {
             return {
                 form: {
