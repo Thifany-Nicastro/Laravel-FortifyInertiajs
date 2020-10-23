@@ -11,7 +11,7 @@
                                 <label for="email" class="col-md-4 col-form-label text-md-right">E-mail</label>
 
                                 <div class="col-md-6">
-                                    <input id="email" type="email" class="form-control" :class="{ 'is-invalid': errors.email }" name="email" v-model="form.email">
+                                    <input id="email" type="text" class="form-control" :class="{ 'is-invalid': errors.email }" name="email" v-model="form.email">
                                     <div v-if="errors.email" class="invalid-feedback">{{ errors.email }}</div>
                                 </div>
                             </div>
@@ -30,6 +30,7 @@
                                     <button type="button" class="btn btn-primary" @click.prevent="submit()">
                                         Login
                                     </button>
+                                    <loading-button :loading="sending" type="submit" @click.native="submit()">Login</loading-button>
                                 </div>
                             </div>
                         </div>
@@ -42,10 +43,12 @@
 
 <script>
     import Layout from './../Layout'
+    import LoadingButton from '@/Shared/LoadingButton'
 
     export default {
         components: {
             Layout,
+            LoadingButton,
         },
 
         props: {
@@ -54,6 +57,7 @@
 
         data() {
             return {
+                sending: false,
                 form: {
                     email: '',
                     password: ''
@@ -70,7 +74,12 @@
             // },
 
             submit() {
-                this.$inertia.post('/login', this.form);
+                // this.sending = true
+                // this.$inertia.post('/login', this.form)
+                this.$inertia.post('/login', this.form, {
+                    onStart: () => this.sending = true,
+                    onFinish: () => this.sending = false,
+                })
                 // this.reset();
             },
         },
