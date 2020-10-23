@@ -9,12 +9,19 @@
                     <li class="nav-item" :class="{ 'active': $inertia.page.url == '/' }">
                         <inertia-link class="nav-link" href="/">Welcome</inertia-link>
                     </li>
-                    <li class="nav-item" :class="{ 'active': $inertia.page.url.startsWith('/login') }">
-                        <inertia-link class="nav-link" href="/login">Login</inertia-link>
-                    </li>
-                    <li class="nav-item" :class="{ 'active': $inertia.page.url.startsWith('/register') }">
-                        <inertia-link class="nav-link" href="/register">Register</inertia-link>
-                    </li>
+                    <template v-if="!$page.props.authUser">
+                        <li class="nav-item" :class="{ 'active': $inertia.page.url.startsWith('/login') }">
+                            <inertia-link class="nav-link" href="/login">Login</inertia-link>
+                        </li>
+                        <li class="nav-item" :class="{ 'active': $inertia.page.url.startsWith('/register') }">
+                            <inertia-link class="nav-link" href="/register">Register</inertia-link>
+                        </li>
+                    </template>
+                    <template v-else>
+                        <li class="nav-item">
+                            <inertia-link class="nav-link btn btn-link" href="/logout" method="post" as="button">Logout</inertia-link>
+                        </li>
+                    </template>
                 </ul>
             </div>
         </nav>

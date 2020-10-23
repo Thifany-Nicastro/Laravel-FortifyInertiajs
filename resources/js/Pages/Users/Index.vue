@@ -7,7 +7,8 @@
                         <div class="card-header">Home</div>
 
                         <div class="card-body">
-                            <inertia-link href="/logout" method="post" as="button" type="button">Logout</inertia-link>
+                            <div>You are logged in as: {{ $page.props.authUser.name }}</div>
+                            <inertia-link href="/logout" method="post" as="button" class="btn btn-primary">Logout</inertia-link>
                         </div>
                     </div>
                 </div>

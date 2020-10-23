@@ -3007,9 +3007,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -3167,6 +3164,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     title: String
@@ -3193,6 +3197,7 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Layout__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../Layout */ "./resources/js/Pages/Layout.vue");
+//
 //
 //
 //
@@ -3267,8 +3272,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
 //
 //
 //
@@ -39366,7 +39369,9 @@ var render = function() {
       _c("div", { staticClass: "row justify-content-center" }, [
         _c("div", { staticClass: "col-md-8" }, [
           _c("div", { staticClass: "card" }, [
-            _c("div", { staticClass: "card-header" }, [_vm._v("Login")]),
+            _c("div", { staticClass: "card-header" }, [
+              _vm._v("Welcome Back!")
+            ]),
             _vm._v(" "),
             _c("div", { staticClass: "card-body" }, [
               _c("div", { staticClass: "form-group row" }, [
@@ -39462,25 +39467,6 @@ var render = function() {
                   "div",
                   { staticClass: "col-md-8 offset-md-4" },
                   [
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-primary",
-                        attrs: { type: "button" },
-                        on: {
-                          click: function($event) {
-                            $event.preventDefault()
-                            return _vm.submit()
-                          }
-                        }
-                      },
-                      [
-                        _vm._v(
-                          "\n                                    Login\n                                "
-                        )
-                      ]
-                    ),
-                    _vm._v(" "),
                     _c(
                       "loading-button",
                       {
@@ -39679,57 +39665,96 @@ var render = function() {
             attrs: { id: "navbarNavDropdown" }
           },
           [
-            _c("ul", { staticClass: "navbar-nav" }, [
-              _c(
-                "li",
-                {
-                  staticClass: "nav-item",
-                  class: { active: _vm.$inertia.page.url == "/" }
-                },
-                [
-                  _c(
-                    "inertia-link",
-                    { staticClass: "nav-link", attrs: { href: "/" } },
-                    [_vm._v("Welcome")]
-                  )
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "li",
-                {
-                  staticClass: "nav-item",
-                  class: { active: _vm.$inertia.page.url.startsWith("/login") }
-                },
-                [
-                  _c(
-                    "inertia-link",
-                    { staticClass: "nav-link", attrs: { href: "/login" } },
-                    [_vm._v("Login")]
-                  )
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "li",
-                {
-                  staticClass: "nav-item",
-                  class: {
-                    active: _vm.$inertia.page.url.startsWith("/register")
-                  }
-                },
-                [
-                  _c(
-                    "inertia-link",
-                    { staticClass: "nav-link", attrs: { href: "/register" } },
-                    [_vm._v("Register")]
-                  )
-                ],
-                1
-              )
-            ])
+            _c(
+              "ul",
+              { staticClass: "navbar-nav" },
+              [
+                _c(
+                  "li",
+                  {
+                    staticClass: "nav-item",
+                    class: { active: _vm.$inertia.page.url == "/" }
+                  },
+                  [
+                    _c(
+                      "inertia-link",
+                      { staticClass: "nav-link", attrs: { href: "/" } },
+                      [_vm._v("Welcome")]
+                    )
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                !_vm.$page.props.authUser
+                  ? [
+                      _c(
+                        "li",
+                        {
+                          staticClass: "nav-item",
+                          class: {
+                            active: _vm.$inertia.page.url.startsWith("/login")
+                          }
+                        },
+                        [
+                          _c(
+                            "inertia-link",
+                            {
+                              staticClass: "nav-link",
+                              attrs: { href: "/login" }
+                            },
+                            [_vm._v("Login")]
+                          )
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "li",
+                        {
+                          staticClass: "nav-item",
+                          class: {
+                            active: _vm.$inertia.page.url.startsWith(
+                              "/register"
+                            )
+                          }
+                        },
+                        [
+                          _c(
+                            "inertia-link",
+                            {
+                              staticClass: "nav-link",
+                              attrs: { href: "/register" }
+                            },
+                            [_vm._v("Register")]
+                          )
+                        ],
+                        1
+                      )
+                    ]
+                  : [
+                      _c(
+                        "li",
+                        { staticClass: "nav-item" },
+                        [
+                          _c(
+                            "inertia-link",
+                            {
+                              staticClass: "nav-link btn btn-link",
+                              attrs: {
+                                href: "/logout",
+                                method: "post",
+                                as: "button"
+                              }
+                            },
+                            [_vm._v("Logout")]
+                          )
+                        ],
+                        1
+                      )
+                    ]
+              ],
+              2
+            )
           ]
         )
       ]
@@ -39792,15 +39817,18 @@ var render = function() {
               "div",
               { staticClass: "card-body" },
               [
+                _c("div", [
+                  _vm._v(
+                    "You are logged in as: " +
+                      _vm._s(_vm.$page.props.authUser.name)
+                  )
+                ]),
+                _vm._v(" "),
                 _c(
                   "inertia-link",
                   {
-                    attrs: {
-                      href: "/logout",
-                      method: "post",
-                      as: "button",
-                      type: "button"
-                    }
+                    staticClass: "btn btn-primary",
+                    attrs: { href: "/logout", method: "post", as: "button" }
                   },
                   [_vm._v("Logout")]
                 )
@@ -39888,16 +39916,14 @@ var render = function() {
     "button",
     { staticClass: "btn btn-primary", attrs: { disabled: _vm.loading } },
     [
-      _vm.loading
-        ? _c("div", [
-            _c("span", {
-              staticClass: "spinner-border spinner-border-sm",
-              attrs: { role: "status", "aria-hidden": "true" }
-            })
-          ])
-        : _vm._e(),
+      _vm._t("default"),
       _vm._v(" "),
-      _vm._t("default")
+      _vm.loading
+        ? _c("span", {
+            staticClass: "spinner-border spinner-border-sm",
+            attrs: { role: "status", "aria-hidden": "true" }
+          })
+        : _vm._e()
     ],
     2
   )
